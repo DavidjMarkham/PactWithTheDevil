@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/BulletController.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=2]
@@ -8,12 +8,24 @@
 [ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.994012 )
-colors = PoolColorArray( 0.207031, 0.174683, 0, 1, 0.140442, 0.152344, 0, 1 )
+[sub_resource type="OpenSimplexNoise" id=4]
+octaves = 4
+period = 4.0
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="NoiseTexture" id=1]
+seamless = true
+noise = SubResource( 4 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+octaves = 4
+period = 4.0
+
+[sub_resource type="NoiseTexture" id=6]
+width = 64
+height = 64
+seamless = true
+as_normalmap = true
+noise = SubResource( 5 )
 
 [node name="World" type="Node2D"]
 
@@ -29,41 +41,48 @@ Bullet = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Enemy1" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 993, 454 )
+position = Vector2( 480.705, -54.5 )
 
 [node name="Enemy2" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 436, 567 )
+position = Vector2( -598.628, -386.289 )
 
 [node name="Enemy3" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 641, 293 )
 
 [node name="Enemy4" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 851, 794 )
+position = Vector2( -556.862, 274.115 )
 
 [node name="Enemy5" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 1132, 225 )
+position = Vector2( 227.514, -393.174 )
 
 [node name="Enemy6" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 1420, 540 )
+position = Vector2( -371.134, -89.9329 )
 
 [node name="Enemy7" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 1598, 92 )
+position = Vector2( 269.828, -215.377 )
 
 [node name="Enemy8" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 1547, 316 )
+position = Vector2( -141.675, -283.575 )
 
 [node name="Enemy9" parent="EnemyController" instance=ExtResource( 6 )]
-position = Vector2( 855, 74 )
+position = Vector2( 600.75, -301.683 )
 
 [node name="Enemy10" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 164, 366 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( 142, 124 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 3614.11, 1802.73 )
-scale = Vector2( 3.61554, 3692.5 )
+[node name="Ground" type="Sprite" parent="."]
+modulate = Color( 0.337255, 0.247059, 0.00392157, 1 )
+position = Vector2( -2.646, 0.259399 )
+scale = Vector2( 12, 12 )
 z_index = -1
-texture = SubResource( 2 )
+texture = SubResource( 1 )
+normal_map = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
