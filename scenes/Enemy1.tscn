@@ -18,3 +18,27 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="Hole_East" type="Node2D" parent="."]
+position = Vector2( 19, 0 )
+
+[node name="Hole_West" type="Node2D" parent="."]
+position = Vector2( -19, 0 )
+
+[node name="Hole_North" type="Node2D" parent="."]
+position = Vector2( 0, -19 )
+
+[node name="Hole_South" type="Node2D" parent="."]
+position = Vector2( 0, 19 )
+
+[node name="Hole_NorthEast" type="Node2D" parent="."]
+position = Vector2( 14, -14 )
+
+[node name="Hole_NorthWest" type="Node2D" parent="."]
+position = Vector2( -14, -14 )
+
+[node name="Hole_SouthEast" type="Node2D" parent="."]
+position = Vector2( 14, 14 )
+
+[node name="Hole_SouthWest" type="Node2D" parent="."]
+position = Vector2( -14, 14 )
+

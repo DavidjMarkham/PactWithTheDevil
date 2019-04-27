@@ -9,7 +9,7 @@ var enemies = []
 func _ready():
 	pass # Replace with function body.
 
-# Enemies are pulled and re-instantited from a finite pool to avoid memory issues
+# Enemies are pulled and re-instantiated from a finite pool to avoid memory issues
 func get_free_enemy():
 	for enemy in self.enemies:
 		if(enemy!=null && !enemy.in_use):

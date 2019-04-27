@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Pact with the Devil"
+config/name="The Devil and Some Aliens Went down to Georgia"
 run/main_scene="res://scenes/World.tscn"
 config/icon="res://icon.png"
 

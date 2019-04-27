@@ -4,6 +4,7 @@ const PLAYER_SPEED = 100
 var bulletController
 var fire_delay_timer = 0
 var FIRE_DELAY = .25
+var health = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,18 +18,33 @@ func _process(delta):
 	# Have player look at mouse position
 	var mpos = get_viewport().get_mouse_position()
 	$playerSprite.look_at(mpos) 
+	var linear_vel = Vector2(0,0)
 		 
 	if(Input.is_key_pressed(KEY_UP) || Input.is_key_pressed(KEY_W)):
-		self.position.y = self.position.y - PLAYER_SPEED * delta
+		linear_vel.y = -1
 	if(Input.is_key_pressed(KEY_DOWN) || Input.is_key_pressed(KEY_S)):
-		self.position.y = self.position.y + PLAYER_SPEED * delta
+		linear_vel.y = 1
 	if(Input.is_key_pressed(KEY_LEFT) || Input.is_key_pressed(KEY_A)):
-        self.position.x = self.position.x - PLAYER_SPEED * delta
+        linear_vel.x = -1
 	if(Input.is_key_pressed(KEY_RIGHT) || Input.is_key_pressed(KEY_D)):
-        self.position.x = self.position.x + PLAYER_SPEED * delta
+        linear_vel.x = 1
+		
+	if(linear_vel != Vector2(0,0)):
+		linear_vel.normalized()
+		self.position.x = self.position.x + linear_vel.x * PLAYER_SPEED * delta
+		self.position.y = self.position.y + linear_vel.y * PLAYER_SPEED * delta
 		
 	if(Input.is_mouse_button_pressed(BUTTON_LEFT) && fire_delay_timer<=0):		
 		fire_delay_timer = FIRE_DELAY
 		self.bulletController.fire_bullet($playerSprite/GunBarrel.global_position,0,$playerSprite.rotation)
-		
+
+func hit(dmg):
+	self.health = self.health - 100
+	if(self.health <= 0):
+		self.dead()
+	
+func dead():
+	$CollisionShape2D.call_deferred("set_disabled", true)
+	self.visible = false
+	
 		

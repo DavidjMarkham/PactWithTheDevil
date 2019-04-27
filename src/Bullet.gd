@@ -24,6 +24,7 @@ func _process(delta):
 			self.in_use = false
 			self.visible =false
 			$CollisionShape2D.set_disabled(true)
+
 	
 func spawn(inputPos,inputRotation):
 	self.position = inputPos

@@ -9,8 +9,8 @@ var bullets = []
 func _ready():
 	pass # Replace with function body.
 
-# Enemies are pulled and re-instantited from a finite pool to avoid memory issues
-func get_free_enemy():
+# Bullets are pulled and re-instantiated from a finite pool to avoid memory issues
+func get_free_bullet():
 	for bullet in self.bullets:
 		if(bullet!=null && !bullet.in_use):
 			return bullet
@@ -26,7 +26,7 @@ func fire_bullet(input_pos,player_owner,input_rotation):
 		bullets.append(bullet_instance)
 		add_child(bullet_instance)					
 	else:
-		bullet_instance = self.get_free_enemy()	
+		bullet_instance = self.get_free_bullet()	
 		if(bullet_instance== null):
 			return
 			

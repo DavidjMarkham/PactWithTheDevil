@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/BulletController.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/EnemyController.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/EnemyBulletController.gd" type="Script" id=3]
+[ext_resource path="res://scenes/EnemyBullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/EnemyController.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.994012 )
@@ -19,40 +21,44 @@ gradient = SubResource( 1 )
 script = ExtResource( 1 )
 Bullet = ExtResource( 2 )
 
-[node name="EnemyController" type="Node" parent="."]
+[node name="EnemyBulletController" type="Node" parent="."]
 script = ExtResource( 3 )
+Bullet = ExtResource( 4 )
 
-[node name="Enemy1" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="EnemyController" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Enemy1" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 993, 454 )
 
-[node name="Enemy2" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy2" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 436, 567 )
 
-[node name="Enemy3" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy3" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 641, 293 )
 
-[node name="Enemy4" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy4" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 851, 794 )
 
-[node name="Enemy5" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy5" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 1132, 225 )
 
-[node name="Enemy6" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy6" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 1420, 540 )
 
-[node name="Enemy7" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy7" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 1598, 92 )
 
-[node name="Enemy8" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy8" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 1547, 316 )
 
-[node name="Enemy9" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy9" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 855, 74 )
 
-[node name="Enemy10" parent="EnemyController" instance=ExtResource( 4 )]
+[node name="Enemy10" parent="EnemyController" instance=ExtResource( 6 )]
 position = Vector2( 164, 366 )
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 142, 124 )
 
 [node name="Sprite" type="Sprite" parent="."]
