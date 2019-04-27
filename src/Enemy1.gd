@@ -4,7 +4,8 @@ var health = 100
 var in_use = true
 var player
 var bulletController
-var ENEMY_1_BASE_MOVE_SPEED = 25
+var enemyController
+var ENEMY_1_BASE_MOVE_SPEED = 50
 var fire_delay_timer = 0
 var min_fire_delay = 2
 var max_fire_delay = 5
@@ -13,11 +14,13 @@ var max_fire_delay = 5
 func _ready():
 	player = get_node("/root/World/Player")
 	self.bulletController = get_node("/root/World/EnemyBulletController")	
+	self.enemyController = get_node("/root/World/EnemyController")	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(!self.in_use):
 		return
+		
 		
 	# Move towards player
 	var moveVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
@@ -37,6 +40,8 @@ func _fire_default():
 				
 	var aimVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
 	aimVector = aimVector.normalized()	
+	
+	
 	
 	self.bulletController.fire_bullet($Hole_East.global_position,1,aimVector)
 	#self.bulletController.fire_bullet($Hole_SouthEast.global_position,1,aimVector)
@@ -58,6 +63,7 @@ func hit(dmg):
 	
 func dead():
 	$CollisionShape2D.call_deferred("set_disabled", true)
+	self.enemyController.active_enemies = self.enemyController.active_enemies - 1
 	self.in_use = false
 	self.visible = false
 	

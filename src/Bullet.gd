@@ -17,10 +17,10 @@ func _process(delta):
 	self.position.x = self.position.x + self.linear_vel.x * BULLET_SPEED * delta
 	self.position.y = self.position.y + self.linear_vel.y * BULLET_SPEED * delta
 	
-	if(	self.position.x < get_viewport().get_visible_rect().position.x - 2020 || \
-		self.position.x >get_viewport().get_visible_rect().position.x + 2020 || \
-		self.position.y < get_viewport().get_visible_rect().position.y - 1180 || \
-		self.position.y > get_viewport().get_visible_rect().position.y + 1180):
+	if(	self.position.x < get_global_transform().get_origin().x - 2020 || \
+		self.position.x >get_global_transform().get_origin().x + 2020 || \
+		self.position.y < get_global_transform().get_origin().y - 1180 || \
+		self.position.y > get_global_transform().get_origin().y + 1180):
 			self.in_use = false
 			self.visible =false
 			$CollisionShape2D.set_disabled(true)

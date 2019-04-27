@@ -4,6 +4,7 @@ export (PackedScene) var Enemy
 
 var MAX_ENEMIES = 100
 var enemies = []
+var active_enemies = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,8 @@ func spawn_enemy(input_pos,player_owner):
 		enemy_instance = self.get_free_enemy()	
 		if(enemy_instance== null):
 			return
-			
+	
+	self.active_enemies = self.active_enemies + 1
 	enemy_instance.spawn(input_pos)
 	
 

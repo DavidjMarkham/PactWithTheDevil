@@ -13,7 +13,7 @@ func _ready():
 	self.camera = get_node("/root/World/Camera2D")	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	
+func _process(delta):		
 	if(fire_delay_timer>0):
 		fire_delay_timer = fire_delay_timer - delta
 	
