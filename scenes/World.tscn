@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://src/BulletController.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/EnemyBulletController.gd" type="Script" id=3]
-[ext_resource path="res://scenes/EnemyBullet.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/RoundController.gd" type="Script" id=5]
-[ext_resource path="res://src/EnemyController.gd" type="Script" id=6]
-[ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/GameController.gd" type="Script" id=1]
+[ext_resource path="res://src/BulletController.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/EnemyBulletController.gd" type="Script" id=4]
+[ext_resource path="res://scenes/EnemyBullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/RoundController.gd" type="Script" id=6]
+[ext_resource path="res://src/EnemyController.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/IngameMenu.tscn" type="PackedScene" id=10]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 octaves = 4
@@ -29,23 +31,24 @@ as_normalmap = true
 noise = SubResource( 3 )
 
 [node name="World" type="Node2D"]
+script = ExtResource( 1 )
 
 [node name="BulletController" type="Node" parent="."]
-script = ExtResource( 1 )
-Bullet = ExtResource( 2 )
+script = ExtResource( 2 )
+Bullet = ExtResource( 3 )
 
 [node name="EnemyBulletController" type="Node" parent="."]
-script = ExtResource( 3 )
-Bullet = ExtResource( 4 )
+script = ExtResource( 4 )
+Bullet = ExtResource( 5 )
 
 [node name="RoundController" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="EnemyController" type="Node" parent="."]
-script = ExtResource( 6 )
-Enemy = ExtResource( 7 )
+script = ExtResource( 7 )
+Enemy = ExtResource( 8 )
 
-[node name="Player" parent="." instance=ExtResource( 8 )]
+[node name="Player" parent="." instance=ExtResource( 9 )]
 
 [node name="Ground" type="Sprite" parent="."]
 modulate = Color( 0.337255, 0.247059, 0.00392157, 1 )
@@ -60,4 +63,11 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="IngameMenu" parent="MenuCanvasLayer" instance=ExtResource( 10 )]
+visible = false
+margin_left = 0.0
+margin_right = 0.0
 

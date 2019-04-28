@@ -50,5 +50,6 @@ func hit(dmg):
 func dead():
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	self.visible = false
+	get_tree().change_scene("res://scenes/MainMenu.tscn")
 	
 		
