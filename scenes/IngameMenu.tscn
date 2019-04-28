@@ -41,58 +41,48 @@ rect_pivot_offset = Vector2( 552.158, 227 )
 theme = ExtResource( 2 )
 text = "Resume"
 
-[node name="NewGameButton" type="Button" parent="."]
+[node name="MainMenuButton" type="Button" parent="."]
 margin_left = 760.0
-margin_top = 421.711
+margin_top = 626.652
 margin_right = 1160.0
-margin_bottom = 546.711
+margin_bottom = 751.652
 rect_pivot_offset = Vector2( 552.158, 227 )
 theme = ExtResource( 2 )
-text = "New Game"
-
-[node name="ExitGameButton" type="Button" parent="."]
-margin_left = 760.0
-margin_top = 758.432
-margin_right = 1160.0
-margin_bottom = 883.432
-rect_pivot_offset = Vector2( 552.158, 227 )
-theme = ExtResource( 2 )
-text = "Exit"
+text = "Quit"
 
 [node name="MusicCheckButton" type="CheckButton" parent="."]
 margin_left = 1005.0
-margin_top = 564.724
+margin_top = 444.304
 margin_right = 1081.0
-margin_bottom = 604.724
-rect_scale = Vector2( 2, 2 )
+margin_bottom = 484.304
+rect_scale = Vector2( 1.5, 1.5 )
 pressed = true
 
 [node name="SoundCheckButton" type="CheckButton" parent="."]
 margin_left = 1005.0
-margin_top = 657.992
+margin_top = 539.844
 margin_right = 1081.0
-margin_bottom = 697.992
-rect_scale = Vector2( 2, 2 )
+margin_bottom = 579.844
+rect_scale = Vector2( 1.5, 1.5 )
 pressed = true
 
 [node name="MusicLabel" type="Label" parent="."]
-margin_left = 825.0
-margin_top = 583.589
-margin_right = 992.0
-margin_bottom = 638.589
+margin_left = 820.456
+margin_top = 451.809
+margin_right = 987.456
+margin_bottom = 506.809
 theme = ExtResource( 2 )
 text = "Music"
 
 [node name="SoundLabel" type="Label" parent="."]
-margin_left = 825.0
-margin_top = 671.819
-margin_right = 990.0
-margin_bottom = 784.819
+margin_left = 820.456
+margin_top = 540.039
+margin_right = 985.456
+margin_bottom = 653.039
 rect_pivot_offset = Vector2( -2222.8, -691.819 )
 theme = ExtResource( 2 )
 text = "Sound
 "
 
 [connection signal="pressed" from="ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="ExitGameButton" to="." method="_on_ExitGameButton_pressed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

@@ -10,7 +10,7 @@ var max_spawn_delay = 3
 var max_active = 20
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	self.enemyController = get_node("/root/World/EnemyController")	
 	self.player = get_node("/root/World/Player")	
 	self.start_round_1()
@@ -50,5 +50,8 @@ func spawn_enemy(level):
 func start_round_1():	
 	self.action_round_in_progress = true
 	cur_round = 1
+	
+func done_round_1():	
+	pass
 	
 	

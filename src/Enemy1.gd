@@ -28,7 +28,7 @@ func _process(delta):
 	self.position.x = self.position.x + moveVector.x * ENEMY_1_BASE_MOVE_SPEED * delta
 	self.position.y = self.position.y + moveVector.y * ENEMY_1_BASE_MOVE_SPEED * delta
 	
-	self.look_at(player.position)
+	$enemyEye.look_at(player.position)
 	
 	if(fire_delay_timer>0):
 		fire_delay_timer = fire_delay_timer - delta
@@ -43,7 +43,7 @@ func _fire_default():
 	
 	
 	
-	self.bulletController.fire_bullet($Hole_East.global_position,1,aimVector)
+	self.bulletController.fire_bullet($Hole_South.global_position,1,aimVector)
 	#self.bulletController.fire_bullet($Hole_SouthEast.global_position,1,aimVector)
 	
 		

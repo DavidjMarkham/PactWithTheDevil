@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://scenes/GameController.gd" type="Script" id=1]
+[ext_resource path="res://src/GameController.gd" type="Script" id=1]
 [ext_resource path="res://src/BulletController.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/EnemyBulletController.gd" type="Script" id=4]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/IngameMenu.tscn" type="PackedScene" id=10]
+
 
 [sub_resource type="OpenSimplexNoise" id=1]
 octaves = 4

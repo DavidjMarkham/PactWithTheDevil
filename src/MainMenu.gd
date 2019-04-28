@@ -20,11 +20,13 @@ func _on_ResumeButton_pressed():
 func _on_NewGameButton_pressed():
 	#get_tree().reload_current_scene
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/World.tscn")
+	#get_tree().change_scene("res://scenes/World.tscn")
+	get_tree().change_scene("res://scenes/DevilDialog.tscn")
 
 
-func _on_ExitGameButton_pressed():
+func _on_ExitGameButton_pressed():	
+	self.visible = false
 	get_tree().quit()
 
-
-
+func _on_MainMenuButton_pressed():	
+	get_tree().change_scene("res://scenes/MainMenu.tscn")
