@@ -33,20 +33,31 @@ func _process(delta):
 	if(fire_delay_timer>0):
 		fire_delay_timer = fire_delay_timer - delta
 	if(fire_delay_timer<=0):
-		self._fire_default()
+		if(randi() %2<1):
+			self._fire_default()
+		else:
+			self._fire_alt()
 		
 func _fire_default():
 	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
-				
-	var aimVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
-	aimVector = aimVector.normalized()	
 	
+	# Aim for player			
+	#var aimVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
+	#aimVector = aimVector.normalized()	
+
 	
+	self.bulletController.fire_bullet($Hole_East.global_position,1,self.rotation)
+	self.bulletController.fire_bullet($Hole_West.global_position,1,self.rotation+PI)
+	self.bulletController.fire_bullet($Hole_North.global_position,1,self.rotation-PI/2)
+	self.bulletController.fire_bullet($Hole_South.global_position,1,self.rotation+PI/2)
 	
-	self.bulletController.fire_bullet($Hole_South.global_position,1,aimVector)
-	#self.bulletController.fire_bullet($Hole_SouthEast.global_position,1,aimVector)
-	
+func _fire_alt():
+	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
 		
+	self.bulletController.fire_bullet($Hole_NorthEast.global_position,1,self.rotation-PI/4)
+	self.bulletController.fire_bullet($Hole_NorthWest.global_position,1,self.rotation-PI/4*3)
+	self.bulletController.fire_bullet($Hole_SouthEast.global_position,1,self.rotation+PI/4)
+	self.bulletController.fire_bullet($Hole_SouthWest.global_position,1,self.rotation+PI/4*3)
 	
 
 func spawn(inputPos):
@@ -58,6 +69,10 @@ func spawn(inputPos):
 	
 func hit(dmg):
 	self.health = self.health - 100
+	$enemyBase/AnimationPlayer.play("Hit")
+
+func hitDone():
+	# Only remove enemy after animation plays
 	if(self.health <= 0):
 		self.dead()
 	

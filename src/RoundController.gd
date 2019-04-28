@@ -22,13 +22,13 @@ func _ready():
 func _process(delta):
 	if(spawn_timer>0):
 		spawn_timer = spawn_timer - delta
-	if(Global.cur_round==1):
-		self._process_round_1(delta)
+	#if(Global.cur_round==1):
+	self._process_round_1(delta)
 
 func _process_round_1(delta):		
 	if(self.num_spawned>=self.max_spawn && self.enemyController.active_enemies == 0):
 		# Round Complete
-		Global.cur_round = 2
+		Global.cur_round = Global.cur_round + 1
 		get_tree().change_scene("res://scenes/DevilDialog.tscn")
 		
 	if(spawn_timer<=0 && self.enemyController.active_enemies<self.max_active && self.num_spawned<self.max_spawn):		

@@ -1,9 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/DevilDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/dialog.png" type="Texture" id=2]
 [ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/dialogPlayer.png" type="Texture" id=4]
+[ext_resource path="res://assets/dialogPlayerAlt.png" type="Texture" id=5]
+[ext_resource path="res://assets/bets/acceptOffer.png" type="Texture" id=6]
+[ext_resource path="res://assets/bets/rewardSpeedGold.png" type="Texture" id=7]
+[ext_resource path="res://assets/bets/handicapFasterEnemies.png" type="Texture" id=8]
+[ext_resource path="res://assets/bets/afterThisRound.png" type="Texture" id=9]
+[ext_resource path="res://assets/bets/rewardSpeedSilver.png" type="Texture" id=10]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
@@ -21,6 +27,30 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 224.456, 229.359 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="DialogueScene" type="Control"]
 script = ExtResource( 1 )
@@ -45,11 +75,11 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Test
 "
 
-[node name="TempDevilLabel" type="Label" parent="."]
-margin_left = 1107.0
-margin_top = 104.0
-margin_right = 1289.0
-margin_bottom = 251.0
+[node name="TempDevilLabel" type="Label" parent="devilDialog"]
+margin_left = 147.0
+margin_top = -436.0
+margin_right = 329.0
+margin_bottom = -289.0
 rect_pivot_offset = Vector2( 405, 168.561 )
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -122,6 +152,81 @@ text = "Test
 position = Vector2( 1.56531, -37.1172 )
 shape = SubResource( 5 )
 
+[node name="Options2" type="Node2D" parent="."]
+visible = false
+
+[node name="choiceAccept" type="Area2D" parent="Options2"]
+position = Vector2( 640, 815 )
+
+[node name="dialogSprite" type="Sprite" parent="Options2/choiceAccept"]
+texture = ExtResource( 5 )
+
+[node name="acceptOffer" type="Sprite" parent="Options2/choiceAccept"]
+position = Vector2( -1.37146, 8.70978 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Options2/choiceAccept"]
+position = Vector2( 1.56531, -37.1172 )
+shape = SubResource( 5 )
+
+[node name="RewardSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
+frames = SubResource( 6 )
+
+[node name="HandicapSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
+frames = SubResource( 7 )
+
+[node name="AfterThisRoundSprite" type="Sprite" parent="Options2/choiceAccept"]
+texture = ExtResource( 9 )
+
+[node name="choiceReject" type="Area2D" parent="Options2"]
+position = Vector2( 1280, 815 )
+
+[node name="dialogSprite2" type="Sprite" parent="Options2/choiceReject"]
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Options2/choiceReject"]
+position = Vector2( 1.56531, -37.1172 )
+shape = SubResource( 5 )
+
+[node name="RewardSprite" type="AnimatedSprite" parent="Options2/choiceReject"]
+frames = SubResource( 8 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Reward" type="Area2D" parent="."]
+visible = false
+position = Vector2( 960, 560 )
+
+[node name="dialogSprite2" type="Sprite" parent="Reward"]
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Reward"]
+margin_left = -216.0
+margin_top = -252.0
+margin_right = 213.0
+margin_bottom = 178.0
+rect_pivot_offset = Vector2( 405, 168.561 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Congrats! You received 
+a reward!
+"
+align = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Reward"]
+position = Vector2( 1.56531, -37.1172 )
+shape = SubResource( 5 )
+
+[node name="RewardSprite" type="AnimatedSprite" parent="Reward"]
+frames = SubResource( 8 )
+
+[node name="BetRewardSprite" type="AnimatedSprite" parent="Reward"]
+visible = false
+frames = SubResource( 6 )
+
 [connection signal="input_event" from="Options3/dialogPlayer1" to="." method="_on_dialogPlayer1_input_event"]
 [connection signal="input_event" from="Options3/dialogPlayer2" to="." method="_on_dialogPlayer2_input_event"]
 [connection signal="input_event" from="Options3/dialogPlayer3" to="." method="_on_dialogPlayer3_input_event"]
+[connection signal="input_event" from="Options2/choiceAccept" to="." method="_on_choiceAccept_input_event"]
+[connection signal="input_event" from="Options2/choiceReject" to="." method="_on_choiceReject_input_event"]
+[connection signal="input_event" from="Reward" to="." method="_on_choiceReject_input_event"]

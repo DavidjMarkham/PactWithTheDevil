@@ -25,13 +25,23 @@ func _process(delta):
 			self.visible =false
 			$CollisionShape2D.set_disabled(true)
 
-	
+"""
 func spawn(inputPos,inputVector):
 	self.position = inputPos
 	self.visible = true
 	self.in_use = true
 	#determine linear_velocity based on x and y components
 	self.linear_vel = inputVector	
+	$CollisionShape2D.set_disabled(false)
+"""
+func spawn(inputPos,inputRotation):
+	self.position = inputPos
+	self.rotation = inputRotation
+	self.visible = true
+	self.in_use = true
+	#determine linear_velocity based on x and y components
+	self.linear_vel = Vector2(cos(self.rotation),sin(self.rotation))	
+	self.linear_vel.normalized()	
 	$CollisionShape2D.set_disabled(false)
 
 

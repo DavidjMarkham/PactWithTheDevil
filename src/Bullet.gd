@@ -33,6 +33,7 @@ func spawn(inputPos,inputRotation):
 	self.in_use = true
 	#determine linear_velocity based on x and y components
 	self.linear_vel = Vector2(cos(self.rotation),sin(self.rotation))	
+	self.linear_vel.normalized()
 	$CollisionShape2D.set_disabled(false)
 
 

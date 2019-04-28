@@ -19,7 +19,7 @@ func get_free_bullet():
 func get_enemy(index):
 	return bullets[index]
 
-func fire_bullet(input_pos,player_owner,input_fire_vector):	
+func fire_bullet(input_pos,player_owner,input_rotation):	
 	var bullet_instance = null	
 	if(bullets.size()<MAX_BULLETS):
 		bullet_instance = Bullet.instance()
@@ -30,7 +30,7 @@ func fire_bullet(input_pos,player_owner,input_fire_vector):
 		if(bullet_instance== null):
 			return
 			
-	bullet_instance.spawn(input_pos,input_fire_vector)
+	bullet_instance.spawn(input_pos,input_rotation)
 	
 
 		

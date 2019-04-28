@@ -34,8 +34,8 @@ func _process(delta):
 		
 	if(linear_vel != Vector2(0,0)):
 		linear_vel.normalized()
-		self.position.x = self.position.x + linear_vel.x * PLAYER_SPEED * delta
-		self.position.y = self.position.y + linear_vel.y * PLAYER_SPEED * delta
+		self.position.x = self.position.x + linear_vel.x * PLAYER_SPEED * delta * Global.player_speed_multipler
+		self.position.y = self.position.y + linear_vel.y * PLAYER_SPEED * delta * Global.player_speed_multipler
 		self.camera.position = self.position
 		
 	if(Input.is_mouse_button_pressed(BUTTON_LEFT) && fire_delay_timer<=0):		
@@ -44,6 +44,10 @@ func _process(delta):
 
 func hit(dmg):
 	self.health = self.health - 100
+	$playerSprite/AnimationPlayer.play("Hit")
+
+func hitDone():
+	# Only remove enemy after animation plays
 	if(self.health <= 0):
 		self.dead()
 	

@@ -1,6 +1,7 @@
 extends Control
 
 var devilText
+var options2
 var options3
 var option1Text
 var option2Text
@@ -8,8 +9,9 @@ var option3Text
 var devilSkitText
 var curSkitIndex
 var playingDevilPart1a = false
-var playingDevilPart1b = false
-var waitForInputTimer = 1
+var playingDevilPartPostReward = false
+var playingReward = false
+var waitForInputTimer = .5
 var gotoNextTimer = 6
 
 var randomResponses = [	"Okay...",
@@ -26,6 +28,7 @@ func _ready():
 	randomize()
 	self.devilText = get_node("/root/DialogueScene/devilDialog/Label")	
 	self.options3 = get_node("/root/DialogueScene/Options3")	
+	self.options2 = get_node("/root/DialogueScene/Options2")	
 	self.option1Text = get_node("/root/DialogueScene/Options3/dialogPlayer1/Label")	
 	self.option2Text = get_node("/root/DialogueScene/Options3/dialogPlayer2/Label")	
 	self.option3Text = get_node("/root/DialogueScene/Options3/dialogPlayer3/Label")	
@@ -38,25 +41,40 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if(self.waitForInputTimer > 0):
+		self.waitForInputTimer = self.waitForInputTimer - delta
+		
+	if(self.gotoNextTimer > 0):
+		self.gotoNextTimer = self.gotoNextTimer - delta
 	# Ugly way to flow through dialogue skits, but it works
-	if(self.playingDevilPart1a):
-		if(self.waitForInputTimer > 0):
-			self.waitForInputTimer = self.waitForInputTimer - delta
-			
-		if(self.gotoNextTimer > 0):
-			self.gotoNextTimer = self.gotoNextTimer - delta
-					
+	if(self.playingDevilPart1a || playingDevilPartPostReward):
 		if(self.gotoNextTimer<=0 || (Input.is_mouse_button_pressed(BUTTON_LEFT) && self.waitForInputTimer<=0)):
 			self.curSkitIndex = self.curSkitIndex + 1
 			if(self.curSkitIndex<self.devilSkitText.size()):
 				self.devilText.text = self.devilSkitText[self.curSkitIndex]
-				self.waitForInputTimer = 1
+				self.waitForInputTimer = .5
 				self.gotoNextTimer = 6
 			else:
-				self.playingDevilPart1a = false
-				self.playingDevilPart1b = true
-				self._showOptions3()
-	#elif(self.playingDevilPart1b):
+				self.playingDevilPart1a = false								
+				if(Global.cur_round == 1 || self.playingDevilPartPostReward):
+					self.playingDevilPartPostReward = false			
+					self._showOptions3()
+				else:
+					self._showOptions2()
+	elif(self.playingReward):
+		if(self.gotoNextTimer<=0 || (Input.is_mouse_button_pressed(BUTTON_LEFT) && self.waitForInputTimer<=0)):
+			$Reward.visible = false	
+			$devilDialog.visible = true
+			self.playingReward = false
+			self.devilSkitText = [	"I'm still lookin' \nfor some souls \nto steal.",							
+									"I'll make another bet \nfor some sweet loot, \nagainst your soul,",
+									"'cause I think some random \nalien dudes are better \nthan you."]
+			
+			self.playingDevilPartPostReward = true
+			self.curSkitIndex = 0	
+			self.devilText.text = self.devilSkitText[0]
+			self.waitForInputTimer = .5
+			self.gotoNextTimer = 4
 		
 			
 
@@ -97,22 +115,52 @@ func _showOptions3():
 	self.option3Text.text = self.randomResponses[response3]
 	self.options3.visible = true
 	
+func _showOptions2():	
+	self.options2.visible = true
+	
 func _on_dialogPlayer1_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
-		if(self.playingDevilPart1b):
-			self.donePart1b()
+		self.startRound()
 
 func _on_dialogPlayer2_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
-		if(self.playingDevilPart1b):
-			self.donePart1b()
+		self.startRound()
 
 
 func _on_dialogPlayer3_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
-		if(self.playingDevilPart1b):
-			self.donePart1b()
+		self.startRound()
 
-
-func donePart1b():
+func startRound():
+	self.options2.visible = false
+	self.options3.visible = false
 	get_tree().change_scene("res://scenes/World.tscn")
+
+func _on_choiceAccept_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		# Start next round
+		Global.accepted_bet = true
+		self.options2.visible = false
+		self.options3.visible = false
+		get_tree().change_scene("res://scenes/World.tscn")
+
+func _on_choiceReject_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		self._show_reward()
+			
+			
+func _give_reward():
+	if(Global.cur_round==2):
+		Global.player_speed_multipler = 1.5
+		
+func _show_reward():
+	self.options2.visible = false
+	Global.accepted_bet = false
+	
+	self.waitForInputTimer = .5
+	self.gotoNextTimer = 6
+	
+	self._give_reward()	
+	$Reward.visible = true	
+	$devilDialog.visible = false
+	self.playingReward = true		
