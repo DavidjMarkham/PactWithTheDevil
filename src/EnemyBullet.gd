@@ -1,7 +1,7 @@
 extends Area2D
 
 var in_use=true
-var BULLET_SPEED = 100
+var BULLET_SPEED = 200
 var linear_vel = Vector2(0,0)
 var dmg = 100
 

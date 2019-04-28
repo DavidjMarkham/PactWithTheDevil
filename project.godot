@@ -19,6 +19,10 @@ config/name="The Devil and Some Aliens Went down to Georgia"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://src/Global.gd"
+
 [display]
 
 window/size/width=1920

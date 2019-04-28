@@ -5,7 +5,7 @@ var in_use = true
 var player
 var bulletController
 var enemyController
-var ENEMY_1_BASE_MOVE_SPEED = 50
+var ENEMY_1_BASE_MOVE_SPEED = 100
 var fire_delay_timer = 0
 var min_fire_delay = 2
 var max_fire_delay = 5

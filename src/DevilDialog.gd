@@ -30,7 +30,11 @@ func _ready():
 	self.option2Text = get_node("/root/DialogueScene/Options3/dialogPlayer2/Label")	
 	self.option3Text = get_node("/root/DialogueScene/Options3/dialogPlayer3/Label")	
 	
-	self._startSkit1()
+	if(Global.cur_round == 1):
+		self._startSkit1()
+		
+	elif(Global.cur_round == 2):
+		self._startSkit2()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -58,10 +62,17 @@ func _process(delta):
 
 func _startSkit1():
 	self.devilSkitText = [	"Hey, I'm the devil. \nI'm lookin' for some souls \nto steal.",
-							"You see, I'm in a bind, \nway behind, I'm willing\n to make a deal.",
-							"You shoot a pretty good gun\n son,but give the Devil\n my due.",
-							"I'll bet some sweet loot,\n against your soul,",
-							"'cause I think some random \nalien dudes are better\n than you."]
+							"You see, I'm in a bind, \nway behind, I'm willing \nto make a deal.",
+							"You shoot a pretty good gun \nson,but give the Devil \nmy due.",
+							"I'll bet some sweet loot, \nagainst your soul,",
+							"'cause I think some random \nalien dudes are better \nthan you."]
+	self._playSkit()
+	
+func _startSkit2():
+	self.devilSkitText = [	"Not bad, I know \nwhen I've been beat.",
+							"But how 'bout we go \ndouble or nothing? \nI'm not bluffing.",
+							"If you win you get \neven better loot.",
+							"But if you lose, \nthe devil gets your soul." ]
 	self._playSkit()
 	
 func _playSkit():
