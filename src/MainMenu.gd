@@ -20,7 +20,20 @@ func _on_ResumeButton_pressed():
 func _on_NewGameButton_pressed():
 	#get_tree().reload_current_scene
 	get_tree().paused = false
-	#get_tree().change_scene("res://scenes/World.tscn")
+	
+	# Reset Globals
+	Global.cur_round = 1
+	Global.accepted_bet = false
+	Global.player_speed_multipler = 1
+	Global.player_fire_rate_multipler = 1
+	Global.player_armor_multipler = 1
+	Global.player_has_spread_shot = false
+	Global.player_has_super_spread_shot = false	
+	Global.enemy_armor_multiplier = 1
+	Global.enemy_move_speed_multiplier = 1
+	Global.enemy_fire_rate_multiplier = 1
+	Global.enemy_spawn_rate = 1
+	
 	get_tree().change_scene("res://scenes/DevilDialog.tscn")
 
 

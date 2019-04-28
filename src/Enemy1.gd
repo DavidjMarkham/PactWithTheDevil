@@ -1,6 +1,7 @@
 extends Area2D
 
 var health = 100
+var ENEMY_BASE_HEALTH = 100
 var in_use = true
 var player
 var bulletController
@@ -25,8 +26,8 @@ func _process(delta):
 	# Move towards player
 	var moveVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
 	moveVector = moveVector.normalized()
-	self.position.x = self.position.x + moveVector.x * ENEMY_1_BASE_MOVE_SPEED * delta
-	self.position.y = self.position.y + moveVector.y * ENEMY_1_BASE_MOVE_SPEED * delta
+	self.position.x = self.position.x + moveVector.x * ENEMY_1_BASE_MOVE_SPEED * delta * Global.enemy_move_speed_multiplier
+	self.position.y = self.position.y + moveVector.y * ENEMY_1_BASE_MOVE_SPEED * delta * Global.enemy_move_speed_multiplier
 	
 	$enemyEye.look_at(player.position)
 	
@@ -39,7 +40,7 @@ func _process(delta):
 			self._fire_alt()
 		
 func _fire_default():
-	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
+	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay) * 1 / Global.enemy_fire_rate_multiplier
 	
 	# Aim for player			
 	#var aimVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
@@ -52,7 +53,7 @@ func _fire_default():
 	self.bulletController.fire_bullet($Hole_South.global_position,1,self.rotation+PI/2)
 	
 func _fire_alt():
-	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
+	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay) * 1 / Global.enemy_fire_rate_multiplier
 		
 	self.bulletController.fire_bullet($Hole_NorthEast.global_position,1,self.rotation-PI/4)
 	self.bulletController.fire_bullet($Hole_NorthWest.global_position,1,self.rotation-PI/4*3)
@@ -65,6 +66,7 @@ func spawn(inputPos):
 	self.visible = true
 	self.position = inputPos
 	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
+	self.health = self.ENEMY_BASE_HEALTH * Global.enemy_armor_multiplier
 	$CollisionShape2D.set_disabled(false)
 	
 func hit(dmg):

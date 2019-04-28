@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/DevilDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/dialog.png" type="Texture" id=2]
@@ -6,10 +6,13 @@
 [ext_resource path="res://assets/dialogPlayer.png" type="Texture" id=4]
 [ext_resource path="res://assets/dialogPlayerAlt.png" type="Texture" id=5]
 [ext_resource path="res://assets/bets/acceptOffer.png" type="Texture" id=6]
-[ext_resource path="res://assets/bets/rewardSpeedGold.png" type="Texture" id=7]
-[ext_resource path="res://assets/bets/handicapFasterEnemies.png" type="Texture" id=8]
-[ext_resource path="res://assets/bets/afterThisRound.png" type="Texture" id=9]
-[ext_resource path="res://assets/bets/rewardSpeedSilver.png" type="Texture" id=10]
+[ext_resource path="res://assets/BetRewards.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://assets/bets/handicapEnemiesMoreArmor.png" type="Texture" id=8]
+[ext_resource path="res://assets/bets/handicapFasterEnemies.png" type="Texture" id=9]
+[ext_resource path="res://assets/bets/handicapEnemiesFireFaster.png" type="Texture" id=10]
+[ext_resource path="res://assets/bets/handicapMoreEnemies.png" type="Texture" id=11]
+[ext_resource path="res://assets/bets/afterThisRound.png" type="Texture" id=12]
+[ext_resource path="res://assets/RegularRewards.tres" type="SpriteFrames" id=13]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
@@ -28,25 +31,9 @@ font_data = ExtResource( 3 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 224.456, 229.359 )
 
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=8]
-animations = [ {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -153,7 +140,6 @@ position = Vector2( 1.56531, -37.1172 )
 shape = SubResource( 5 )
 
 [node name="Options2" type="Node2D" parent="."]
-visible = false
 
 [node name="choiceAccept" type="Area2D" parent="Options2"]
 position = Vector2( 640, 815 )
@@ -169,14 +155,14 @@ texture = ExtResource( 6 )
 position = Vector2( 1.56531, -37.1172 )
 shape = SubResource( 5 )
 
-[node name="RewardSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
-frames = SubResource( 6 )
+[node name="BetRewardSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
+frames = ExtResource( 7 )
 
 [node name="HandicapSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
 frames = SubResource( 7 )
 
 [node name="AfterThisRoundSprite" type="Sprite" parent="Options2/choiceAccept"]
-texture = ExtResource( 9 )
+texture = ExtResource( 12 )
 
 [node name="choiceReject" type="Area2D" parent="Options2"]
 position = Vector2( 1280, 815 )
@@ -189,7 +175,7 @@ position = Vector2( 1.56531, -37.1172 )
 shape = SubResource( 5 )
 
 [node name="RewardSprite" type="AnimatedSprite" parent="Options2/choiceReject"]
-frames = SubResource( 8 )
+frames = ExtResource( 13 )
 
 [node name="Node" type="Node" parent="."]
 
@@ -218,11 +204,7 @@ position = Vector2( 1.56531, -37.1172 )
 shape = SubResource( 5 )
 
 [node name="RewardSprite" type="AnimatedSprite" parent="Reward"]
-frames = SubResource( 8 )
-
-[node name="BetRewardSprite" type="AnimatedSprite" parent="Reward"]
-visible = false
-frames = SubResource( 6 )
+frames = ExtResource( 13 )
 
 [connection signal="input_event" from="Options3/dialogPlayer1" to="." method="_on_dialogPlayer1_input_event"]
 [connection signal="input_event" from="Options3/dialogPlayer2" to="." method="_on_dialogPlayer2_input_event"]

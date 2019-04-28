@@ -1,10 +1,11 @@
 extends Area2D
 
-const PLAYER_SPEED = 100
+const PLAYER_SPEED = 75
 var bulletController
 var fire_delay_timer = 0
-var FIRE_DELAY = .25
+var FIRE_DELAY = .4
 var health = 100
+var BASE_HEALTH = 100
 var camera
 
 # Called when the node enters the scene tree for the first time.
@@ -39,8 +40,15 @@ func _process(delta):
 		self.camera.position = self.position
 		
 	if(Input.is_mouse_button_pressed(BUTTON_LEFT) && fire_delay_timer<=0):		
-		fire_delay_timer = FIRE_DELAY
+		fire_delay_timer = FIRE_DELAY * 1 / Global.player_fire_rate_multipler 
 		self.bulletController.fire_bullet($playerSprite/GunBarrel.global_position,0,$playerSprite.rotation)
+		if(Global.player_has_spread_shot || Global.player_has_super_spread_shot):
+			self.bulletController.fire_bullet($playerSprite/GunBarrel.global_position,0,$playerSprite.rotation+PI/12)
+			self.bulletController.fire_bullet($playerSprite/GunBarrel.global_position,0,$playerSprite.rotation-PI/12)
+		if(Global.player_has_super_spread_shot):
+			self.bulletController.fire_bullet($playerSprite/GunBarrel.global_position,0,$playerSprite.rotation+PI/12 * 2)
+			self.bulletController.fire_bullet($playerSprite/GunBarrel.global_position,0,$playerSprite.rotation-PI/12 * 2)
+		
 
 func hit(dmg):
 	self.health = self.health - 100
