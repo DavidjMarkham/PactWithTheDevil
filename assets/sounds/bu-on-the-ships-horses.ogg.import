@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bu-on-the-ships-horses.ogg-52f9e8f201e869e5a050a6c81f16070a.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/bu-on-the-ships-horses.ogg"
+dest_files=[ "res://.import/bu-on-the-ships-horses.ogg-52f9e8f201e869e5a050a6c81f16070a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -16,7 +16,10 @@ func _ready():
 	self.player = get_node("/root/World/Player")	
 	
 	
+	
 	self.player.health = self.player.BASE_HEALTH * Global.player_armor_multipler
+	if(Global.cur_round==1):
+		self.player.health = 200
 	
 	#if(Global.cur_round == 1):
 	self.start_round_1()
@@ -130,8 +133,6 @@ func start_round_1():
 		self.max_active = 35
 		self.max_spawn = 230
 	
-	#self.max_active = 2
-	#self.max_spawn = 4 
 	self.max_active = self.max_active * Global.enemy_spawn_rate
 	self.max_spawn = self.max_spawn * Global.enemy_spawn_rate
 	

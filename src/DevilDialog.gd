@@ -121,22 +121,70 @@ func _showOptions3():
 	self.options3.visible = true
 	
 func _showOptions2():	
-	$Options2/choiceAccept/BetRewardSprite.frame = Global.cur_round - 2
-	$Options2/choiceReject/RewardSprite.frame = Global.cur_round - 2
+	if(Global.cur_round==2):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 0
+		$Options2/choiceAccept/HandicapSprite.frame = 0
+		$Options2/choiceReject/RewardSprite.frame = 0
+	elif(Global.cur_round==5):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 1
+		$Options2/choiceAccept/HandicapSprite.frame = 1
+		$Options2/choiceReject/RewardSprite.frame = 1
+	elif(Global.cur_round==8):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 2
+		$Options2/choiceAccept/HandicapSprite.frame = 2
+		$Options2/choiceReject/RewardSprite.frame = 2
+	elif(Global.cur_round==11):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 3
+		$Options2/choiceAccept/HandicapSprite.frame = 3
+		$Options2/choiceReject/RewardSprite.frame = 3
+	elif(Global.cur_round==14):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 4
+		$Options2/choiceAccept/HandicapSprite.frame = 4
+		$Options2/choiceReject/RewardSprite.frame = 4
+	elif(Global.cur_round==17):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 5
+		$Options2/choiceAccept/HandicapSprite.frame = 5
+		$Options2/choiceReject/RewardSprite.frame = 5
+	elif(Global.cur_round==20):		
+		$Options2/choiceAccept/BetRewardSprite.frame = 6
+		$Options2/choiceAccept/HandicapSprite.frame = 6
+		$Options2/choiceReject/RewardSprite.frame = 6
+	
 	self.waitForInputTimer = 1
 	self.options2.visible = true
 	
 func _on_dialogPlayer1_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed && self.waitForInputTimer<=0):
+		$AudioStreamPlayer2D.play(0)
+		# Wait for sound to play
+		var t = Timer.new()
+		t.set_wait_time(0.25)
+		add_child(t)
+		t.start()
+		yield(t, "timeout")
 		self.startRound()
 
 func _on_dialogPlayer2_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed && self.waitForInputTimer<=0):
+		$AudioStreamPlayer2D.play(0)
+		# Wait for sound to play
+		var t = Timer.new()
+		t.set_wait_time(0.25)
+		add_child(t)
+		t.start()
+		yield(t, "timeout")
 		self.startRound()
 
 
 func _on_dialogPlayer3_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed && self.waitForInputTimer<=0):
+		$AudioStreamPlayer2D.play(0)
+		# Wait for sound to play
+		var t = Timer.new()
+		t.set_wait_time(0.25)
+		add_child(t)
+		t.start()
+		yield(t, "timeout")
 		self.startRound()
 
 func startRound():
@@ -162,6 +210,13 @@ func _apply_handicap():
 
 func _on_choiceAccept_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed && self.waitForInputTimer<=0):
+		$AudioStreamPlayer2D.play(0)
+		# Wait for sound to play
+		var t = Timer.new()
+		t.set_wait_time(0.25)
+		add_child(t)
+		t.start()
+		yield(t, "timeout")
 		# Start next round
 		Global.accepted_bet = true
 		self.options2.visible = false
@@ -171,10 +226,18 @@ func _on_choiceAccept_input_event(viewport, event, shape_idx):
 
 func _on_choiceReject_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed && self.waitForInputTimer<=0):
+		$AudioStreamPlayer2D.play(0)
+		# Wait for sound to play
+		var t = Timer.new()
+		t.set_wait_time(0.25)
+		add_child(t)
+		t.start()
+		yield(t, "timeout")
 		self._show_reward()
 						
 		
 func _show_reward():
+	$AudioStreamPlayer2DReward.play(0)
 	self.options2.visible = false
 	Global.accepted_bet = false
 	
@@ -192,7 +255,7 @@ func _show_reward():
 		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 1.5
 		$Reward/RewardSprite.frame = 2
 	elif(Global.cur_round==11):		
-		Global.player_has_spread_shot = true
+		Global.player_has_spread_shot = true		
 		$Reward/RewardSprite.frame = 3
 	elif(Global.cur_round==14):		
 		Global.player_armor_multipler = Global.player_armor_multipler * 1.5
@@ -203,6 +266,6 @@ func _show_reward():
 	elif(Global.cur_round==20):		
 		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 1.5
 		$Reward/RewardSprite.frame = 6
-	
+			
 	$devilDialog.visible = false
 	self.playingReward = true		

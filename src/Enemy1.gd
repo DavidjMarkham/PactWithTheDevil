@@ -25,19 +25,24 @@ func _process(delta):
 		
 	# Move towards player
 	var moveVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
-	moveVector = moveVector.normalized()
-	self.position.x = self.position.x + moveVector.x * ENEMY_1_BASE_MOVE_SPEED * delta * Global.enemy_move_speed_multiplier
-	self.position.y = self.position.y + moveVector.y * ENEMY_1_BASE_MOVE_SPEED * delta * Global.enemy_move_speed_multiplier
-	
+	if(moveVector.length()>200):
+		moveVector = moveVector.normalized()
+		self.position.x = self.position.x + moveVector.x * ENEMY_1_BASE_MOVE_SPEED * delta * Global.enemy_move_speed_multiplier
+		self.position.y = self.position.y + moveVector.y * ENEMY_1_BASE_MOVE_SPEED * delta * Global.enemy_move_speed_multiplier
+		
 	$enemyEye.look_at(player.position)
 	
 	if(fire_delay_timer>0):
 		fire_delay_timer = fire_delay_timer - delta
 	if(fire_delay_timer<=0):
-		if(randi() %2<1):
+		if(Global.cur_round>8):
 			self._fire_default()
-		else:
 			self._fire_alt()
+		else:
+			if(randi() %2<1):
+				self._fire_default()
+			else:
+				self._fire_alt()
 		
 func _fire_default():
 	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay) * 1 / Global.enemy_fire_rate_multiplier
@@ -66,7 +71,7 @@ func spawn(inputPos):
 	self.visible = true
 	self.position = inputPos
 	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
-	self.health = self.ENEMY_BASE_HEALTH * Global.enemy_armor_multiplier
+	self.health = (self.ENEMY_BASE_HEALTH + 100 * Global.cur_round/5) * Global.enemy_armor_multiplier
 	$CollisionShape2D.set_disabled(false)
 	
 func hit(dmg):

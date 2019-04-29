@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/DevilDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/dialog.png" type="Texture" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://assets/bets/handicapMoreEnemies.png" type="Texture" id=11]
 [ext_resource path="res://assets/bets/afterThisRound.png" type="Texture" id=12]
 [ext_resource path="res://assets/RegularRewards.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://assets/devil.png" type="Texture" id=14]
+[ext_resource path="res://assets/sounds/Blip_Select39.ogg" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/Powerup16.ogg" type="AudioStream" id=16]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
@@ -24,14 +27,10 @@ gradient = SubResource( 1 )
 size = 32
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 64
-font_data = ExtResource( 3 )
-
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 224.456, 229.359 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
@@ -62,17 +61,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Test
 "
 
-[node name="TempDevilLabel" type="Label" parent="devilDialog"]
-margin_left = 147.0
-margin_top = -436.0
-margin_right = 329.0
-margin_bottom = -289.0
-rect_pivot_offset = Vector2( 405, 168.561 )
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Devil
-"
-
 [node name="Options3" type="Node2D" parent="."]
 visible = false
 
@@ -95,7 +83,7 @@ text = "Test
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Options3/dialogPlayer1"]
 position = Vector2( 1.56531, -37.1172 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="dialogPlayer2" type="Area2D" parent="Options3"]
 position = Vector2( 960, 785 )
@@ -116,7 +104,7 @@ text = "Test
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Options3/dialogPlayer2"]
 position = Vector2( 1.56531, -37.1172 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="dialogPlayer3" type="Area2D" parent="Options3"]
 position = Vector2( 1440, 785 )
@@ -137,7 +125,7 @@ text = "Test
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Options3/dialogPlayer3"]
 position = Vector2( 1.56531, -37.1172 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Options2" type="Node2D" parent="."]
 
@@ -153,13 +141,13 @@ texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Options2/choiceAccept"]
 position = Vector2( 1.56531, -37.1172 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="BetRewardSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
 frames = ExtResource( 7 )
 
 [node name="HandicapSprite" type="AnimatedSprite" parent="Options2/choiceAccept"]
-frames = SubResource( 7 )
+frames = SubResource( 5 )
 
 [node name="AfterThisRoundSprite" type="Sprite" parent="Options2/choiceAccept"]
 texture = ExtResource( 12 )
@@ -172,7 +160,7 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Options2/choiceReject"]
 position = Vector2( 1.56531, -37.1172 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="RewardSprite" type="AnimatedSprite" parent="Options2/choiceReject"]
 frames = ExtResource( 13 )
@@ -201,10 +189,20 @@ align = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Reward"]
 position = Vector2( 1.56531, -37.1172 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="RewardSprite" type="AnimatedSprite" parent="Reward"]
 frames = ExtResource( 13 )
+
+[node name="devil" type="Sprite" parent="."]
+position = Vector2( 1198.93, 159.506 )
+texture = ExtResource( 14 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+
+[node name="AudioStreamPlayer2DReward" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
 
 [connection signal="input_event" from="Options3/dialogPlayer1" to="." method="_on_dialogPlayer1_input_event"]
 [connection signal="input_event" from="Options3/dialogPlayer2" to="." method="_on_dialogPlayer2_input_event"]

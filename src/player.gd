@@ -33,6 +33,16 @@ func _process(delta):
 	if(Input.is_key_pressed(KEY_RIGHT) || Input.is_key_pressed(KEY_D)):
         linear_vel.x = 1
 		
+	if(self.position.x > 3000 && linear_vel.x>0):
+		linear_vel.x = 0
+	if(self.position.x < -3000 && linear_vel.x<0):
+		linear_vel.x = 0
+	if(self.position.y > 1000 && linear_vel.y>0):
+		linear_vel.y = 0
+	if(self.position.y < -1000 && linear_vel.y<0):
+		linear_vel.y = 0
+	
+		
 	if(linear_vel != Vector2(0,0)):
 		linear_vel.normalized()
 		self.position.x = self.position.x + linear_vel.x * PLAYER_SPEED * delta * Global.player_speed_multipler
@@ -62,6 +72,6 @@ func hitDone():
 func dead():
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	self.visible = false
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene("res://scenes/GameOver.tscn")
 	
 		

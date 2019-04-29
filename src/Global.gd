@@ -1,6 +1,7 @@
 extends Node
 # Singleton used for sharing variables across multiple scenes
 
+var musicOn = true
 var cur_round = 1
 var accepted_bet = false
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Laser_Shoot22.ogg-1843ad57888f5799a1627e0502715436.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/Laser_Shoot22.ogg"
+dest_files=[ "res://.import/Laser_Shoot22.ogg-1843ad57888f5799a1627e0502715436.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,24 +1,36 @@
 extends Control
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var blipSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	blipSound = get_node("/root/Control/AudioStreamPlayer2D")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 
-func _on_ResumeButton_pressed():
+func _on_ResumeButton_pressed():	
+	$AudioStreamPlayer2D.play(0)
+	# Wait for sound to play
+	var t = Timer.new()
+	t.set_wait_time(0.25)
+	add_child(t)
+	t.start()
+	yield(t, "timeout")
 	self.visible = false
 	get_tree().paused = false
 
 func _on_NewGameButton_pressed():
-	#get_tree().reload_current_scene
+	$AudioStreamPlayer2D.play(0)
+	# Wait for sound to play
+	var t = Timer.new()
+	t.set_wait_time(0.25)
+	add_child(t)
+	t.start()
+	yield(t, "timeout")
 	get_tree().paused = false
 	
 	# Reset Globals
@@ -38,8 +50,24 @@ func _on_NewGameButton_pressed():
 
 
 func _on_ExitGameButton_pressed():	
+	$AudioStreamPlayer2D.play(0)
+	# Wait for sound to play
+	var t = Timer.new()
+	t.set_wait_time(0.25)
+	add_child(t)
+	t.start()
+	yield(t, "timeout")
 	self.visible = false
 	get_tree().quit()
 
 func _on_MainMenuButton_pressed():	
+	$AudioStreamPlayer2D.play(0)
+	# Wait for sound to play
+	var t = Timer.new()
+	t.set_wait_time(0.25)
+	add_child(t)
+	t.start()
+	yield(t, "timeout")
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
+
+

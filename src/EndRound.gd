@@ -5,6 +5,7 @@ var waitForInputTimer = .5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AudioStreamPlayer2D.play(0)
 	var roundMessage = get_node("/root/EndRoundScene/Label")	
 	roundMessage.text = "Round " + str(Global.cur_round-1) + " Completed!"	
 	if(Global.accepted_bet):

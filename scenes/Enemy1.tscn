@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Enemy1.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemy1.png" type="Texture" id=2]
-[ext_resource path="res://assets/enemyEye.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/Hit_Hurt19.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/enemyEye.png" type="Texture" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Hit"
 length = 0.5
 tracks/0/type = "value"
@@ -33,8 +34,22 @@ tracks/1/keys = {
 "method": "hitDone"
 } ]
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("../AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 28.0
 
 [node name="Enemy1" type="Area2D" groups=[
@@ -47,11 +62,11 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemyBase"]
-anims/Hit = SubResource( 2 )
+anims/Hit = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Hole_East" type="Node2D" parent="."]
 position = Vector2( 19, 0 )
@@ -78,5 +93,8 @@ position = Vector2( 14, 14 )
 position = Vector2( -14, 14 )
 
 [node name="enemyEye" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 

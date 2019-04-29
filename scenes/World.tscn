@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/GameController.gd" type="Script" id=1]
 [ext_resource path="res://src/BulletController.gd" type="Script" id=2]
@@ -9,27 +9,9 @@
 [ext_resource path="res://src/EnemyController.gd" type="Script" id=7]
 [ext_resource path="res://scenes/Enemy1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/IngameMenu.tscn" type="PackedScene" id=10]
-
-
-[sub_resource type="OpenSimplexNoise" id=1]
-octaves = 4
-period = 4.0
-
-[sub_resource type="NoiseTexture" id=2]
-seamless = true
-noise = SubResource( 1 )
-
-[sub_resource type="OpenSimplexNoise" id=3]
-octaves = 4
-period = 4.0
-
-[sub_resource type="NoiseTexture" id=4]
-width = 64
-height = 64
-seamless = true
-as_normalmap = true
-noise = SubResource( 3 )
+[ext_resource path="res://assets/bg.png" type="Texture" id=10]
+[ext_resource path="res://scenes/IngameMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/sounds/bu-on-the-ships-horses.ogg" type="AudioStream" id=12]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -52,12 +34,11 @@ Enemy = ExtResource( 8 )
 [node name="Player" parent="." instance=ExtResource( 9 )]
 
 [node name="Ground" type="Sprite" parent="."]
-modulate = Color( 0.337255, 0.247059, 0.00392157, 1 )
+modulate = Color( 0.862745, 0.862745, 0.862745, 1 )
 position = Vector2( -2.646, 0.259399 )
-scale = Vector2( 12, 12 )
+scale = Vector2( 2, 2 )
 z_index = -1
-texture = SubResource( 2 )
-normal_map = SubResource( 4 )
+texture = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -67,8 +48,15 @@ current = true
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="IngameMenu" parent="MenuCanvasLayer" instance=ExtResource( 10 )]
+[node name="IngameMenu" parent="MenuCanvasLayer" instance=ExtResource( 11 )]
 visible = false
 margin_left = 0.0
 margin_right = 0.0
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 1191.42, -1229.84 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -7.068
 
