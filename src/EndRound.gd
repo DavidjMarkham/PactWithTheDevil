@@ -52,7 +52,7 @@ func show_reward():
 		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 1.5
 		$Reward/BetRewardSprite.frame = 2
 	elif(Global.cur_round==12):		
-		Global.player_has_spread_shot = true
+		Global.player_has_super_spread_shot = true
 		$Reward/BetRewardSprite.frame = 3
 	elif(Global.cur_round==15):		
 		Global.player_armor_multipler = Global.player_armor_multipler * 1.5

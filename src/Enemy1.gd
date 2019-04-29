@@ -22,7 +22,7 @@ func _process(delta):
 	if(!self.in_use):
 		return
 		
-		
+	self.rotation = self.rotation + 0.5 * delta
 	# Move towards player
 	var moveVector = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
 	if(moveVector.length()>200):

@@ -40,7 +40,7 @@ func _on_NewGameButton_pressed():
 	Global.player_fire_rate_multipler = 1
 	Global.player_armor_multipler = 1
 	Global.player_has_spread_shot = false
-	Global.player_has_super_spread_shot = false	
+	Global.player_has_super_spread_shot = false
 	Global.enemy_armor_multiplier = 1
 	Global.enemy_move_speed_multiplier = 1
 	Global.enemy_fire_rate_multiplier = 1
