@@ -71,7 +71,7 @@ func spawn(inputPos):
 	self.visible = true
 	self.position = inputPos
 	self.fire_delay_timer = rand_range(min_fire_delay,max_fire_delay)
-	self.health = (self.ENEMY_BASE_HEALTH + 100 * Global.cur_round/5) * Global.enemy_armor_multiplier
+	self.health = (self.ENEMY_BASE_HEALTH + 100 * floor(Global.cur_round/5)) * Global.enemy_armor_multiplier
 	$CollisionShape2D.set_disabled(false)
 	
 func hit(dmg):

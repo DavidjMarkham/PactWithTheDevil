@@ -8,6 +8,7 @@ func _ready():
 	$AudioStreamPlayer2D.play(0)
 	var roundMessage = get_node("/root/EndRoundScene/Label")	
 	roundMessage.text = "Round " + str(Global.cur_round-1) + " Completed!"	
+	
 	if(Global.accepted_bet):
 		self.show_reward()
 		
@@ -43,23 +44,23 @@ func show_reward():
 	Global.accepted_bet = false
 		
 	if(Global.cur_round==3):		
-		Global.player_armor_multipler = Global.player_armor_multipler * 1.5
+		Global.player_armor_multipler = Global.player_armor_multipler * 3
 		$Reward/BetRewardSprite.frame = 0
 	elif(Global.cur_round==6):		
-		Global.player_speed_multipler = Global.player_speed_multipler * 1.5
+		Global.player_speed_multipler = Global.player_speed_multipler * 3
 		$Reward/BetRewardSprite.frame = 1
 	elif(Global.cur_round==9):		
-		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 1.5
+		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 3
 		$Reward/BetRewardSprite.frame = 2
 	elif(Global.cur_round==12):		
 		Global.player_has_super_spread_shot = true
 		$Reward/BetRewardSprite.frame = 3
 	elif(Global.cur_round==15):		
-		Global.player_armor_multipler = Global.player_armor_multipler * 1.5
+		Global.player_armor_multipler = Global.player_armor_multipler * 3
 		$Reward/BetRewardSprite.frame = 4
 	elif(Global.cur_round==18):		
-		Global.player_speed_multipler = Global.player_speed_multipler * 1.5
+		Global.player_speed_multipler = Global.player_speed_multipler * 3
 		$Reward/BetRewardSprite.frame = 5
 	elif(Global.cur_round==21):		
-		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 1.5
+		Global.player_fire_rate_multipler = Global.player_fire_rate_multipler * 3
 		$Reward/BetRewardSprite.frame = 6

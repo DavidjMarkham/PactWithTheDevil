@@ -4,10 +4,11 @@ var in_use=true
 var BULLET_SPEED = 200
 var linear_vel = Vector2(0,0)
 var dmg = 100
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	player = get_node("/root/World/Player")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.w
 func _process(delta):
@@ -17,10 +18,10 @@ func _process(delta):
 	self.position.x = self.position.x + self.linear_vel.x * BULLET_SPEED * delta
 	self.position.y = self.position.y + self.linear_vel.y * BULLET_SPEED * delta
 		
-	if(	self.position.x < get_global_transform().get_origin().x - 2020 || \
-		self.position.x >get_global_transform().get_origin().x + 2020 || \
-		self.position.y < get_global_transform().get_origin().y - 1180 || \
-		self.position.y > get_global_transform().get_origin().y + 1180):
+	if(	self.position.x < player.position.x - 2020 || \
+		self.position.x >player.position.x + 2020 || \
+		self.position.y < player.position.y - 1180 || \
+		self.position.y > player.position.y + 1180):
 			self.in_use = false
 			self.visible =false
 			$CollisionShape2D.set_disabled(true)

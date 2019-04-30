@@ -19,7 +19,7 @@ func _ready():
 	
 	self.player.health = self.player.BASE_HEALTH * Global.player_armor_multipler
 	if(Global.cur_round==1):
-		self.player.health = 200
+		self.player.health = 100
 	
 	#if(Global.cur_round == 1):
 	self.start_round_1()

@@ -1,6 +1,6 @@
 extends Area2D
 
-const PLAYER_SPEED = 75
+const PLAYER_SPEED = 100
 var bulletController
 var fire_delay_timer = 0
 var FIRE_DELAY = .4
